@@ -1,0 +1,8 @@
+11-34-7->[info] service_name:FriendServiceRpc
+11-34-7->[info] method_name:GetFriendList
+11-50-13->[info] service_name:FriendServiceRpc
+11-50-13->[info] method_name:GetFriendList
+11-50-13->[info] ip:127.0.0.1
+22-13-50->[info] service_name:FriendServiceRpc
+22-13-50->[info] method_name:GetFriendList
+22-13-50->[info] ip:127.0.0.1

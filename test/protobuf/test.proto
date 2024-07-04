@@ -1,0 +1,62 @@
+syntax ="proto3"; // 声明了protobuf的版本
+
+package Daidaipai;// 声明了代码所在的包 (对于C++来说是namespace)
+
+// 定义下面的选项，表示生成service服务类和rpc方法描述(默认是不生成的)
+option cc_generic_services=true;
+
+// string类型用bytes性能更好，减少转换
+message ResultCode
+{
+    int32 errcode=1;
+    // string errmsg=2;
+    bytes errmsg=2;
+}
+// 数据 列表 映射表
+// 定义登录请求消息类型 name pwd
+message LoginRequest
+{
+    bytes name=1;// 表示第一个字段
+    bytes pwd=2;
+}
+
+// 定义登录响应消息类型
+message LoginResponse
+{
+    ResultCode result=1;
+    bool success=2;
+}
+
+// 定义好友列表请求消息类型
+message GetFriendListsRequest
+{
+    uint32 userid=1;
+}
+
+message User
+{
+    bytes name=1;
+    uint32 age=2;
+    enum Sex
+    {   
+        // 枚举还是从0开始
+        MAN=0;
+        WOMAN=1;
+    }
+    Sex sex=3;
+}
+// 定义好友列表响应消息类型
+message GetFriendListsResponse
+{
+    ResultCode result=1;
+    // 不止一个用户，用列表类型
+    repeated User friend_list=2;
+}
+
+// 在protobuf里面怎么定义描述rpc方法的类型  - service
+// protobuf本身没有实现rpc的功能，它只是提供一种对方法描述
+service UserServiceRpc
+{
+    rpc Login(LoginRequest) returns(LoginResponse);
+    rpc GetFriendLists(GetFriendListsRequest) returns(GetFriendListsResponse);
+}
